@@ -8,9 +8,9 @@
 	const identifier = uuidv4();
 </script>
 
-<div class='my-2'>
+<div class="my-2">
 	<label for={identifier} class="label">
-		<span class="label-text text-secondary font-bold">{label}</span>
+		<span class="label-text text-primary font-bold">{label}</span>
 	</label>
 	<input
 		id={identifier}
@@ -21,7 +21,7 @@
 	/>
 	{#if error}
 		<label for={identifier} class="label">
-			<span class="label-text text-white bg-warning font-semibold p-2 rounded-2xl">{error}</span>
+			<span class="label-text text-white bg-error font-semibold p-2 rounded-b-2xl">❌ {error}</span>
 		</label>
 	{/if}
 </div>
