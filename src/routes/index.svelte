@@ -56,35 +56,39 @@
 	}
 </script>
 
-<div class="container mx-auto px-4" data-theme="aqua">
-	<h1 class="font-bold text-primary text-4xl">Bienvenido a SvelteKit</h1>
+<div class="container mx-auto px-2 py-2" data-theme="cupcake">
+	<div class="flex justify-around gap-2">
+		<div>
+			<h1 class="font-bold text-primary text-4xl">Bienvenido a SvelteKit</h1>
 
-	<form on:submit|preventDefault={handleSubmit}>
-		<InputText label="Nombre" bind:value={fields.nombre} error={errors.nombre} />
-		<InputText label="Apellido" bind:value={fields.apellido} error={errors.apellido} />
-		<InputNumber
-			label="Sueldo Basico"
-			bind:value={fields.sueldoBasico}
-			error={errors.sueldoBasico}
-			min={0}
-			max={999999}
-			step={1}
-		/>
-		<Dropdown
-			label="Categoria"
-			bind:value={fields.categoria}
-			error={errors.categoria}
-			choices={CATEGORIA_CHOICE}
-		/>
-		<InputRango
-			label="Rango"
-			bind:value={fields.rango}
-			error={errors.rango}
-			min={1}
-			max={1000}
-			step={1}
-		/>
+			<form on:submit|preventDefault={handleSubmit}>
+				<InputText label="Nombre" bind:value={fields.nombre} error={errors.nombre} />
+				<InputText label="Apellido" bind:value={fields.apellido} error={errors.apellido} />
+				<InputNumber
+					label="Sueldo Basico"
+					bind:value={fields.sueldoBasico}
+					error={errors.sueldoBasico}
+					min={0}
+					max={999999}
+					step={1}
+				/>
+				<Dropdown
+					label="Categoria"
+					bind:value={fields.categoria}
+					error={errors.categoria}
+					choices={CATEGORIA_CHOICE}
+				/>
+				<InputRango
+					label="Rango"
+					bind:value={fields.rango}
+					error={errors.rango}
+					min={1}
+					max={1000}
+					step={1}
+				/>
 
-		<input type="submit" value="Enviar" class="btn btn-primary my-4" />
-	</form>
+				<input type="submit" value="Enviar" class="btn btn-primary my-4" />
+			</form>
+		</div>
+	</div>
 </div>
