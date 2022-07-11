@@ -1,26 +1,33 @@
 <script>
-	import Dropdown from '$lib/components/dropdown.svelte';
+	import InputCombobox from '$lib/components/input-combobox.svelte';
+	import InputCheckbox from '$lib/components/input-checkbox.svelte';
 	import InputNumber from '$lib/components/input-number.svelte';
 	import InputRango from '$lib/components/input-rango.svelte';
 	import InputText from '$lib/components/input-text.svelte';
+	import InputSelectbox from '$lib/components/input-selectbox.svelte';
 
 	let minimoSueldoBasico = 60000;
 	let fields = {
-		nombre: '',
-		apellido: '',
-		sueldoBasico: 0,
-		categoria: 'Efectivo',
-		rango: 1
+		nombre: 'Armando Javier',
+		apellido: 'Rodriguez',
+		sueldoBasico: 150000,
+		categoria: 'Quincenal',
+		rango: 3,
+		activo: true,
+		perfiles: ['Admin','Invitado']
 	};
 	let errors = {
 		nombre: '',
 		apellido: '',
 		sueldoBasico: '',
 		categoria: '',
-		rango: ''
+		rango: '',
+		activo: '',
+		perfiles: ''
 	};
 
-	const CATEGORIA_CHOICE = ['Efectivo', 'Contratado'];
+	const CATEGORIA_CHOICE = ['Mensual', 'Quincenal', 'Agencia', 'Eventual'];
+	const PERFILES_CHOICE = ['Admin', 'Invitado', 'Balanza', 'Hilatura', 'Tejeduria', 'Urdido'];
 
 	let valid = false;
 
@@ -50,16 +57,23 @@
 			errors.sueldoBasico = '';
 		}
 
+		if (fields.perfiles.length < 1) {
+			errors.perfiles = 'Perfiles no puede estar vacio, seleccione por lo menos uno.';
+			valid = false;
+		} else {
+			errors.perfiles = '';
+		}
+
 		if (valid) {
 			console.log('Valid', fields);
 		}
 	}
 </script>
 
-<div class="container mx-auto px-2 py-2" data-theme="cupcake">
+<main class="container mx-auto px-2 py-2" data-theme="retro">
 	<div class="flex justify-around gap-2">
 		<div>
-			<h1 class="font-bold text-primary text-4xl">Bienvenido a SvelteKit</h1>
+			<h1 class="font-bold text-secondary text-4xl">SvelteKit</h1>
 
 			<form on:submit|preventDefault={handleSubmit}>
 				<InputText label="Nombre" bind:value={fields.nombre} error={errors.nombre} />
@@ -72,7 +86,7 @@
 					max={999999}
 					step={1}
 				/>
-				<Dropdown
+				<InputCombobox
 					label="Categoria"
 					bind:value={fields.categoria}
 					error={errors.categoria}
@@ -83,12 +97,20 @@
 					bind:value={fields.rango}
 					error={errors.rango}
 					min={1}
-					max={1000}
+					max={5}
 					step={1}
+				/>
+				<InputCheckbox label="¿ Está Activo ?" bind:checked={fields.activo} error={errors.activo} />
+
+				<InputSelectbox
+					label="Perfiles"
+					bind:value={fields.perfiles}
+					error={errors.perfiles}
+					choices={PERFILES_CHOICE}
 				/>
 
 				<input type="submit" value="Enviar" class="btn btn-primary my-4" />
 			</form>
 		</div>
 	</div>
-</div>
+</main>
